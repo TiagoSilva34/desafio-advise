@@ -1,0 +1,43 @@
+<app-header></app-header>
+<div id="search">
+    <div class="titles">
+        <h2>Fase teste prático Front-end</h2>
+        <h3>pokebusca</h3>
+    </div>
+    <div class="search-form">
+        <input 
+            type="text" 
+            [(ngModel)]="title"
+            autocomplete="off"            
+            (keyup)="handleSearch()"
+            placeholder="Buscar"
+        >
+        <img src="../../../assets//search.svg" alt="">
+    </div>
+</div>
+
+<div class="content">
+    <p class="info-paginate">Exibindo {{ paginaAtual }} de 20 items</p>
+    <div class="line"></div>
+    <ul>
+        <li *ngFor="let pokemon of pokemons | paginate: { itemsPerPage: contador, currentPage: paginaAtual } | filter: title">
+            <div>
+                <img 
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png"
+                >
+                <span>
+                    {{ pokemon.name }}
+                </span>
+            </div>
+            <div class="line"></div>
+        </li>
+     
+    </ul>
+    <pagination-controls 
+        class="paginate"
+        (pageChange)="paginaAtual = $event" 
+        previousLabel="Anterior" 
+        nextLabel="Próximo"
+    >
+    </pagination-controls>
+</div>
